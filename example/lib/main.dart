@@ -30,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String? countryValue;
   String? stateValue;
   String? cityValue;
+  double? spacing;
 
   void displayMsg(msg) {
     print(msg);
@@ -38,9 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Country State and City Picker'),
-      ),
       body: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: 600,
@@ -53,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(4.0))),
                     contentPadding: EdgeInsets.all(5.0)),
-                spacing: 25.0,
+                spacing: spacing,
                 onCountryChanged: (value) {
                   setState(() {
                     countryValue = value;
@@ -72,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   });
                 },
                 onCityTap: () => displayMsg('You\'ve tapped on cities!'),
+                 focusedBorderColor: null, enabledBorderColor: null,
               ),
               // InkWell(
               //     onTap: () {
