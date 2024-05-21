@@ -20,6 +20,7 @@ class SelectState extends StatefulWidget {
   final double? spacing;
   final Color? focusedBorderColor;
   final Color? enabledBorderColor;
+  final double?feildHeight;
 
   const SelectState(
       {Key? key,
@@ -35,7 +36,8 @@ class SelectState extends StatefulWidget {
       this.onStateTap,
       this.onCityTap,
       required this.focusedBorderColor,
-      required this.enabledBorderColor})
+      required this.enabledBorderColor,
+      required this.feildHeight})
       : super(key: key);
 
   @override
@@ -166,6 +168,7 @@ class _SelectStateState extends State<SelectState> {
           items: _country,
           dropdownBuilder: (context, selectedItem) {
             return Container(
+              height: widget.feildHeight?? MediaQuery.of(context).size.height*0.02,
                 child: selectedItem != null
                     ? Text(
                         selectedItem,
@@ -226,6 +229,8 @@ class _SelectStateState extends State<SelectState> {
           items: _states,
           dropdownBuilder: (context, selectedItem) {
             return Container(
+                            height: widget.feildHeight?? MediaQuery.of(context).size.height*0.02,
+
                 child: selectedItem != null
                     ? Text(
                         selectedItem,
@@ -288,6 +293,8 @@ class _SelectStateState extends State<SelectState> {
           items: _cities,
           dropdownBuilder: (context, selectedItem) {
             return Container(
+                            height: widget.feildHeight?? MediaQuery.of(context).size.height*0.02,
+
                 child: selectedItem != null
                     ? Text(
                         selectedItem,
