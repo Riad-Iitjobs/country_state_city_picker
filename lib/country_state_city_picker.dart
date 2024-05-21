@@ -20,7 +20,10 @@ class SelectState extends StatefulWidget {
   final double? spacing;
   final Color? focusedBorderColor;
   final Color? enabledBorderColor;
-  final double?feildHeight;
+  final double?fieldHeight;
+  final Color? fieldBackgroundColor;
+  final TextStyle? fieldLabelStyle;
+  final TextStyle? fieldTextStyle;
 
   const SelectState(
       {Key? key,
@@ -37,7 +40,10 @@ class SelectState extends StatefulWidget {
       this.onCityTap,
       required this.focusedBorderColor,
       required this.enabledBorderColor,
-      required this.feildHeight,
+      required this.fieldHeight,
+      required this.fieldBackgroundColor,
+      required this.fieldLabelStyle,
+      required this.fieldTextStyle
       })
       : super(key: key);
 
@@ -165,193 +171,204 @@ class _SelectStateState extends State<SelectState> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        DropdownSearch<String>(
-          items: _country,
-          dropdownBuilder: (context, selectedItem) {
-            return Container(
-              alignment: Alignment.centerLeft,
-              height: widget.feildHeight?? MediaQuery.of(context).size.height*0.02,
-                child: selectedItem != null
-                    ? Text(
-                        selectedItem,
-                        style: TextStyle(
-                          color: Color(0xff0F1031),
-                          fontSize: 11,
-                        ),
-                      )
-                    : null);
-          },
-          popupProps: PopupProps.menu(
-            disabledItemFn: (value) => value == "Choose Country",
-            showSearchBox: true,
-            searchFieldProps: TextFieldProps(
-                autofocus: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
+        Container(
+          color: widget.fieldBackgroundColor??Colors.white,
+          child: DropdownSearch<String>(
+            items: _country,
+            dropdownBuilder: (context, selectedItem) {
+              return Container(
+                alignment: Alignment.centerLeft,
+                height: widget.fieldHeight?? MediaQuery.of(context).size.height*0.02,
+                  child: selectedItem != null
+                      ? Text(
+                          selectedItem,
+                          style: widget.fieldTextStyle?? TextStyle(
+                            color: Color(0xff0F1031),
+                            fontSize: 11,
+                          ),
+                        )
+                      : null);
+            },
+            popupProps: PopupProps.menu(
+              disabledItemFn: (value) => value == "Choose Country",
+              showSearchBox: true,
+              searchFieldProps: TextFieldProps(
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(
-                          color:
-                              widget.enabledBorderColor ?? Color(0xffBBC2C9))),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(
-                          color:
-                              widget.focusedBorderColor ?? Color(0xff0F1031))),
-                )),
-
-            // showSelectedItems: true,
-          ),
-          dropdownDecoratorProps: DropDownDecoratorProps(
-            dropdownSearchDecoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.grey, fontSize: 11),
-                label: Text('Choose Country'),
-                contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(
-                        color: widget.enabledBorderColor ?? Color(0xffBBC2C9))),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(
-                        color: widget.focusedBorderColor ?? Color(0xff0F1031))),
-                floatingLabelBehavior: FloatingLabelBehavior.auto),
-          ),
-          onChanged: (value) => _onSelectedCountry(value!),
-        ),
-        SizedBox(
-          height: widget.spacing ?? MediaQuery.of(context).size.height * 0.025,
-        ),
-        DropdownSearch<String>(
-          items: _states,
-          dropdownBuilder: (context, selectedItem) {
-            return Container(
-                            alignment: Alignment.centerLeft,
-
-                            height: widget.feildHeight?? MediaQuery.of(context).size.height*0.02,
-
-                child: selectedItem != null
-                    ? Text(
-                        selectedItem,
-                        style: TextStyle(
-                          color: Color(0xff0F1031),
-                          fontSize: 11,
-                        ),
-                      )
-                    : null);
-          },
-          popupProps: PopupProps.menu(
-            disabledItemFn: (value) => value == "Choose  State/Province",
-            showSearchBox: true,
-            searchFieldProps: TextFieldProps(
-                autofocus: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(
-                          color:
-                              widget.enabledBorderColor ?? Color(0xffBBC2C9))),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(
-                          color:
-                              widget.focusedBorderColor ?? Color(0xff0F1031))),
-                )),
-
-            // showSelectedItems: true,
-          ),
-          dropdownDecoratorProps: DropDownDecoratorProps(
-            dropdownSearchDecoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.grey, fontSize: 11),
-                label: Text('Choose  State/Province'),
-                contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
                     ),
-                    borderSide: BorderSide(color: Colors.green)),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(
-                        color: widget.enabledBorderColor ?? Color(0xffBBC2C9))),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(
-                        color: widget.focusedBorderColor ?? Color(0xff0F1031))),
-                floatingLabelBehavior: FloatingLabelBehavior.auto),
-          ),
-          onChanged: (value) => _onSelectedState(value!),
-        ),
-        SizedBox(
-          height: widget.spacing ?? MediaQuery.of(context).size.height * 0.025,
-        ),
-        DropdownSearch<String>(
-          items: _cities,
-          dropdownBuilder: (context, selectedItem) {
-            return Container(
-                            alignment: Alignment.centerLeft,
-
-                            height: widget.feildHeight?? MediaQuery.of(context).size.height*0.02,
-
-                child: selectedItem != null
-                    ? Text(
-                        selectedItem,
-                        style: TextStyle(
-                          color: Color(0xff0F1031),
-                          fontSize: 11,
-                        ),
-                      )
-                    : null);
-          },
-          popupProps: PopupProps.menu(
-            disabledItemFn: (value) => value == "Choose City",
-            showSearchBox: true,
-            searchFieldProps: TextFieldProps(
-                autofocus: true,
-                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color:
+                                widget.enabledBorderColor ?? Color(0xffBBC2C9))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color:
+                                widget.focusedBorderColor ?? Color(0xff0F1031))),
+                  )),
+          
+              // showSelectedItems: true,
+            ),
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              dropdownSearchDecoration: InputDecoration(
+                  labelStyle: widget.fieldLabelStyle?? TextStyle(color: Colors.grey, fontSize: 11),
+                  label: Text('Choose Country'),
+                  contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       borderSide: BorderSide(
-                          color:
-                              widget.enabledBorderColor ?? Color(0xffBBC2C9))),
+                          color: widget.enabledBorderColor ?? Color(0xffBBC2C9))),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       borderSide: BorderSide(
-                          color:
-                              widget.focusedBorderColor ?? Color(0xff0F1031))),
-                )),
+                          color: widget.focusedBorderColor ?? Color(0xff0F1031))),
+                  floatingLabelBehavior: FloatingLabelBehavior.auto),
+            ),
+            onChanged: (value) => _onSelectedCountry(value!),
+          ),
+        ),
+        SizedBox(
+          height: widget.spacing ?? MediaQuery.of(context).size.height * 0.025,
+        ),
+        Container(
+                    color: widget.fieldBackgroundColor??Colors.white,
 
-            // showSelectedItems: true,
+          child: DropdownSearch<String>(
+            items: _states,
+            dropdownBuilder: (context, selectedItem) {
+              return Container(
+                              alignment: Alignment.centerLeft,
+          
+                              height: widget.fieldHeight?? MediaQuery.of(context).size.height*0.02,
+          
+                  child: selectedItem != null
+                      ? Text(
+                          selectedItem,
+                          style: widget.fieldTextStyle?? TextStyle(
+                            color: Color(0xff0F1031),
+                            fontSize: 11,
+                          ),
+                        )
+                      : null);
+            },
+            popupProps: PopupProps.menu(
+              disabledItemFn: (value) => value == "Choose  State/Province",
+              showSearchBox: true,
+              searchFieldProps: TextFieldProps(
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color:
+                                widget.enabledBorderColor ?? Color(0xffBBC2C9))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color:
+                                widget.focusedBorderColor ?? Color(0xff0F1031))),
+                  )),
+          
+              // showSelectedItems: true,
+            ),
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              dropdownSearchDecoration: InputDecoration(
+                  labelStyle: widget.fieldLabelStyle?? TextStyle(color: Colors.grey, fontSize: 11),
+                  label: Text('Choose  State/Province'),
+                  contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      borderSide: BorderSide(color: Colors.green)),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderSide: BorderSide(
+                          color: widget.enabledBorderColor ?? Color(0xffBBC2C9))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderSide: BorderSide(
+                          color: widget.focusedBorderColor ?? Color(0xff0F1031))),
+                  floatingLabelBehavior: FloatingLabelBehavior.auto),
+            ),
+            onChanged: (value) => _onSelectedState(value!),
           ),
-          dropdownDecoratorProps: DropDownDecoratorProps(
-            dropdownSearchDecoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.grey, fontSize: 11),
-                label: Text('Choose City'),
-                contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(
-                        color: widget.enabledBorderColor ?? Color(0xffBBC2C9))),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(
-                        color: widget.focusedBorderColor ?? Color(0xff0F1031))),
-                floatingLabelBehavior: FloatingLabelBehavior.auto),
+        ),
+        SizedBox(
+          height: widget.spacing ?? MediaQuery.of(context).size.height * 0.025,
+        ),
+        Container(
+                    color: widget.fieldBackgroundColor??Colors.white,
+
+          child: DropdownSearch<String>(
+            items: _cities,
+            dropdownBuilder: (context, selectedItem) {
+              return Container(
+                              alignment: Alignment.centerLeft,
+          
+                              height: widget.fieldHeight?? MediaQuery.of(context).size.height*0.02,
+          
+                  child: selectedItem != null
+                      ? Text(
+                          selectedItem,
+                          style: widget.fieldTextStyle?? TextStyle(
+                            color: Color(0xff0F1031),
+                            fontSize: 11,
+                          ),
+                        )
+                      : null);
+            },
+            popupProps: PopupProps.menu(
+              disabledItemFn: (value) => value == "Choose City",
+              showSearchBox: true,
+              searchFieldProps: TextFieldProps(
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color:
+                                widget.enabledBorderColor ?? Color(0xffBBC2C9))),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color:
+                                widget.focusedBorderColor ?? Color(0xff0F1031))),
+                  )),
+          
+              // showSelectedItems: true,
+            ),
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              dropdownSearchDecoration: InputDecoration(
+                  labelStyle: widget.fieldLabelStyle?? TextStyle(color: Colors.grey, fontSize: 11),
+                  label: Text('Choose City'),
+                  contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderSide: BorderSide(
+                          color: widget.enabledBorderColor ?? Color(0xffBBC2C9))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderSide: BorderSide(
+                          color: widget.focusedBorderColor ?? Color(0xff0F1031))),
+                  floatingLabelBehavior: FloatingLabelBehavior.auto),
+            ),
+            onChanged: (value) => _onSelectedCity(value!),
           ),
-          onChanged: (value) => _onSelectedCity(value!),
         ),
       ],
     );

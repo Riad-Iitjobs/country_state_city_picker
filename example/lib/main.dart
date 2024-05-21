@@ -71,7 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 onCityTap: () => displayMsg('You\'ve tapped on cities!'),
                  focusedBorderColor: null, enabledBorderColor: null, 
-                 feildHeight: MediaQuery.of(context).size.height*0.07,
+                 fieldHeight: MediaQuery.of(context).size.height*0.07, 
+                 fieldBackgroundColor: null, fieldLabelStyle: TextStyle(color: Colors.black,fontSize: 20, 
+                 fontWeight: FontWeight.bold), fieldTextStyle: TextStyle(
+                  color: Colors.green,fontSize: 29
+                 ),
               ),
               // InkWell(
               //     onTap: () {
