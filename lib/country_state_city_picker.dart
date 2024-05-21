@@ -37,7 +37,8 @@ class SelectState extends StatefulWidget {
       this.onCityTap,
       required this.focusedBorderColor,
       required this.enabledBorderColor,
-      required this.feildHeight})
+      required this.feildHeight,
+      })
       : super(key: key);
 
   @override
@@ -168,6 +169,7 @@ class _SelectStateState extends State<SelectState> {
           items: _country,
           dropdownBuilder: (context, selectedItem) {
             return Container(
+              alignment: Alignment.centerLeft,
               height: widget.feildHeight?? MediaQuery.of(context).size.height*0.02,
                 child: selectedItem != null
                     ? Text(
@@ -229,6 +231,8 @@ class _SelectStateState extends State<SelectState> {
           items: _states,
           dropdownBuilder: (context, selectedItem) {
             return Container(
+                            alignment: Alignment.centerLeft,
+
                             height: widget.feildHeight?? MediaQuery.of(context).size.height*0.02,
 
                 child: selectedItem != null
@@ -293,6 +297,8 @@ class _SelectStateState extends State<SelectState> {
           items: _cities,
           dropdownBuilder: (context, selectedItem) {
             return Container(
+                            alignment: Alignment.centerLeft,
+
                             height: widget.feildHeight?? MediaQuery.of(context).size.height*0.02,
 
                 child: selectedItem != null
