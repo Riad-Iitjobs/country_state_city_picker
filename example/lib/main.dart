@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(CscPciker());
 }
 
-class MyApp extends StatelessWidget {
+class CscPciker extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   });
                 },
                 onCityTap: () => displayMsg('You\'ve tapped on cities!'),
-                 focusedBorderColor: null, enabledBorderColor: null,
+                 focusedBorderColor: null, enabledBorderColor: null, feildHeight: null,
               ),
               // InkWell(
               //     onTap: () {
