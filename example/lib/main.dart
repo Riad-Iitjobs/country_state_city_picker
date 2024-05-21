@@ -70,7 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   });
                 },
                 onCityTap: () => displayMsg('You\'ve tapped on cities!'),
-                 focusedBorderColor: null, enabledBorderColor: null, feildHeight: null,
+                 focusedBorderColor: null, enabledBorderColor: null, 
+                 feildHeight: MediaQuery.of(context).size.height*0.07,
               ),
               // InkWell(
               //     onTap: () {
